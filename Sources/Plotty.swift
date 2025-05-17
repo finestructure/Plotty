@@ -1,14 +1,13 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
-// 
-// Swift Argument Parser
-// https://swiftpackageindex.com/apple/swift-argument-parser/documentation
-
 import ArgumentParser
 
 @main
-struct Plotty: ParsableCommand {
-    mutating func run() throws {
-        print("Hello, world!")
+struct Plotty: AsyncParsableCommand {
+    @MainActor
+    mutating func run() async throws {
+        let data = Measurement.fetchData()
+        let page = Page(data: data)
+        let canvas = Canvas(page: page)
+        let filename = "~/Downloads/chart.pdf"
+        canvas.render(to: filename)
     }
 }
