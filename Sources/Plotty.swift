@@ -2,6 +2,18 @@ import ArgumentParser
 
 @main
 struct Plotty: AsyncParsableCommand {
+    @Option(name: .shortAndLong, help: "The height of the canvas in points.")
+    var height: Double = 600
+
+    @Option(name: .shortAndLong, help: "The width of the canvas in points.")
+    var width: Double = 600
+
+    @Option(help: "The header of the graph.")
+    var header: String?
+
+    @Option(name: .shortAndLong, help: "The title of the graph.")
+    var title: String?
+
     @MainActor
     mutating func run() async throws {
         print("Reading data...")
@@ -18,8 +30,8 @@ struct Plotty: AsyncParsableCommand {
         print("Data:")
         print(data)
 
-        let page = Page(data: data)
-        let canvas = Canvas(page: page)
+        let page = Page(data: data, header: header, title: title)
+        let canvas = Canvas(page: page, width: width, height: height)
         let filename = "~/Downloads/chart.pdf"
         canvas.render(to: filename)
     }
