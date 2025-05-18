@@ -14,6 +14,9 @@ struct Plotty: AsyncParsableCommand {
     @Option(name: .shortAndLong, help: "The title of the graph.")
     var title: String?
 
+    @Option(name: .shortAndLong, help: "The path to the output file.")
+    var output: String = "plot.pdf"
+
     @MainActor
     mutating func run() async throws {
         print("Reading data...")
@@ -32,7 +35,6 @@ struct Plotty: AsyncParsableCommand {
 
         let page = Page(data: data, header: header, title: title)
         let canvas = Canvas(page: page, width: width, height: height)
-        let filename = "~/Downloads/chart.pdf"
-        canvas.render(to: filename)
+        canvas.render(to: output)
     }
 }
