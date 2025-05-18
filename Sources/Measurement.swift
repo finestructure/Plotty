@@ -1,35 +1,19 @@
+import RegexBuilder
+
 struct Measurement {
-    var index: Int
-    var ratio: Double
+    var value: Double
 }
 
-private let d1 = [
-    9.63902473449707,
-    9.956002235412598,
-    9.274959564208984,
-    16.32297039031982,
-    9.666919708251953,
-    9.83893871307373,
-    10.34295558929443,
-    9.54902172088623,
-    9.493112564086914,
-    10.04493236541748,
-]
-private let d2 = [
-    13.799071311950684,
-    12.67707347869873,
-    13.838052749633789,
-    11.90805435180664,
-    11.947989463806152,
-    13.233065605163574,
-    11.779069900512695,
-    11.688947677612305,
-    11.240005493164062,
-    11.162042617797852,
-]
 
 extension Measurement {
-    static func fetchData() -> [Measurement] {
-        d1.enumerated().map { Measurement(index: $0, ratio: $1) }
+    static func parse(_ input: String) -> Self? {
+        let regex = /(.*\s|^)([0-9]+[.][0-9]+)(\s.*|$)/
+
+        if let match = input.wholeMatch(of: regex),
+           let res = Double(match.output.2) {
+            return .init(value: res)
+        } else {
+            return nil
+        }
     }
 }
