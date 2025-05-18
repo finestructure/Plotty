@@ -21,12 +21,12 @@ extension Measurement {
 
 extension [Measurement?] {
     var series: [[Measurement]] {
-        generateSeries(self)
+        _generateSeries(self)
     }
 }
 
 
-func generateSeries<T>(_ sequence: any Sequence<T?>) -> [[T]] {
+func _generateSeries<T>(_ sequence: any Sequence<T?>) -> [[T]] {
     var series = [[T]]()
     var values = [T]()
     for value in sequence {

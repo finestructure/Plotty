@@ -19,11 +19,11 @@ struct PlottyTests {
     }
 
     @Test
-    func _generateSeries() async throws {
-        #expect(generateSeries([1]) == [[1]])
-        #expect(generateSeries([1, nil]) == [[1]])
-        #expect(generateSeries([1, 2, nil, 3]) == [[1, 2], [3]])
-        #expect(generateSeries([nil, 1, 2, nil, 3]) == [[1, 2], [3]])
+    func generateSeries() async throws {
+        #expect(_generateSeries([1]) == [[1]])
+        #expect(_generateSeries([1, nil]) == [[1]])
+        #expect(_generateSeries([1, 2, nil, 3]) == [[1, 2], [3]])
+        #expect(_generateSeries([nil, 1, 2, nil, 3]) == [[1, 2], [3]])
     }
 
 }

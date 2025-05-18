@@ -11,6 +11,9 @@ struct Plotty: AsyncParsableCommand {
     @Option(help: "The header of the graph.")
     var header: String?
 
+    @Option(name: .shortAndLong, help: "The path to the input file. Use '-' for stdin.")
+    var input: Input = .stdin
+
     @Option(name: .shortAndLong, help: "The title of the graph.")
     var title: String?
 
@@ -22,7 +25,7 @@ struct Plotty: AsyncParsableCommand {
         print("Reading data...")
 
         var measurements = [Measurement?]()
-        while let line = readLine() {
+        for line in input {
             print(line)
             measurements.append(Measurement.parse(line))
         }
