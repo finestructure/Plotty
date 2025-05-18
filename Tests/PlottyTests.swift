@@ -18,4 +18,12 @@ struct PlottyTests {
         #expect(Measurement.parse("a")?.value == nil)
     }
 
+    @Test
+    func _generateSeries() async throws {
+        #expect(generateSeries([1]) == [[1]])
+        #expect(generateSeries([1, nil]) == [[1]])
+        #expect(generateSeries([1, 2, nil, 3]) == [[1, 2], [3]])
+        #expect(generateSeries([nil, 1, 2, nil, 3]) == [[1, 2], [3]])
+    }
+
 }

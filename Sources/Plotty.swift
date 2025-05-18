@@ -6,12 +6,14 @@ struct Plotty: AsyncParsableCommand {
     mutating func run() async throws {
         print("Reading data...")
 
-        var data = [Measurement]()
+        var measurements = [Measurement?]()
         while let line = readLine() {
             print(line)
-            if let m = Measurement.parse(line) {
-                data.append(m)
-            }
+            measurements.append(Measurement.parse(line))
+        }
+        let series = measurements.series
+        let data = series.enumerated().map {
+            (id: "Series: \($0)", data: $1)
         }
         print("Data:")
         print(data)
