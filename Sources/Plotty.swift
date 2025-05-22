@@ -26,15 +26,14 @@ struct Plotty: AsyncParsableCommand {
 
         var measurements = [Measurement?]()
         for line in input {
-            print(line)
             measurements.append(Measurement.parse(line))
         }
         let series = measurements.series
         let data = series.enumerated().map {
             (id: "Series: \($0)", data: $1)
         }
-        print("Data:")
-        print(data)
+        print("Parsed data:")
+        print("\(data)")
 
         let page = Page(data: data, header: header, title: title)
         let canvas = Canvas(page: page, width: width, height: height)
