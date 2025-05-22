@@ -12,7 +12,7 @@ enum Input: ExpressibleByArgument {
             case "-":
                 self = .stdin
             default:
-                let url = URL(fileURLWithPath: argument)
+                let url = URL(fileURLWithPath: argument.expandingTildeInPath)
                 self = .file(url)
         }
     }

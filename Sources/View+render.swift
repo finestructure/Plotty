@@ -27,10 +27,3 @@ extension View {
         return url
     }
 }
-
-
-private extension String {
-    var expandingTildeInPath: String {
-        return NSString(string: self).expandingTildeInPath
-    }
-}
