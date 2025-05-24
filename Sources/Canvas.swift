@@ -22,8 +22,18 @@ public struct Canvas<Page: View>: View {
         page
     }
 
-    func render(to filename: String) {
-        page.render(to: filename)
+    func render(to output: Output) {
+        switch output {
+            case .file(let url):
+                let url = page.render(to: url.path())
+                print("Saved to \(url.path()).")
+            case .clipboard:
+                let data = page.render()
+                let pasteboard = NSPasteboard.general
+                pasteboard.clearContents()
+                pasteboard.setData(data, forType: .pdf)
+                print("Copied to clipboard.")
+        }
     }
 }
 

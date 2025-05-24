@@ -17,8 +17,8 @@ struct Plotty: AsyncParsableCommand {
     @Option(name: .shortAndLong, help: "The title of the graph.")
     var title: String?
 
-    @Option(name: .shortAndLong, help: "The path to the output file.")
-    var output: String = "plot.pdf"
+    @Option(name: .shortAndLong, help: "The path to the output file. Use '-' to copy the output to the clipboard.")
+    var output: Output = .clipboard
 
     @MainActor
     mutating func run() async throws {
