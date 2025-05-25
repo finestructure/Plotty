@@ -26,13 +26,13 @@ public struct Canvas<Page: View>: View {
         switch output {
             case .file(let url):
                 let url = page.render(to: url.path())
-                print("Saved to \(url.path()).")
+                print("Plot saved to \(url.path()).")
             case .clipboard:
                 let data = page.render()
                 let pasteboard = NSPasteboard.general
                 pasteboard.clearContents()
                 pasteboard.setData(data, forType: .pdf)
-                print("Copied to clipboard.")
+                print("Plot saved to clipboard.")
         }
     }
 }

@@ -11,13 +11,13 @@ struct Plotty: AsyncParsableCommand {
     @Option(help: "The header of the graph.")
     var header: String?
 
-    @Option(name: .shortAndLong, help: "The path to the input file. Use '-' for stdin.")
+    @Option(name: .shortAndLong, help: "The path to the input file. Use '-' for stdin and 'clipboard' to read data from the Clipboard.")
     var input: Input = .stdin
 
     @Option(name: .shortAndLong, help: "The title of the graph.")
     var title: String?
 
-    @Option(name: .shortAndLong, help: "The path to the output file. Use '-' to copy the output to the clipboard.")
+    @Option(name: .shortAndLong, help: "The path to the output file. Use 'clipboard' to copy the output to the Clipboard.")
     var output: Output = .clipboard
 
     @MainActor
@@ -31,6 +31,11 @@ struct Plotty: AsyncParsableCommand {
         let series = measurements.series
         let data = series.enumerated().map {
             (id: "Series: \($0)", data: $1)
+        }
+
+        guard !data.isEmpty else {
+            print("No data found.")
+            return
         }
         print("Parsed data:")
         print("\(data)")

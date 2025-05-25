@@ -9,7 +9,7 @@ enum Output: Equatable, ExpressibleByArgument {
 
     init?(argument: String) {
         switch argument {
-            case "-":
+            case "clipboard":
                 self = .clipboard
             default:
                 let url = URL(fileURLWithPath: argument.expandingTildeInPath)
