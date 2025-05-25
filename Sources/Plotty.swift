@@ -2,6 +2,9 @@ import ArgumentParser
 
 @main
 struct Plotty: AsyncParsableCommand {
+    @Option(name: .shortAndLong, help: "The output format of the canvas.")
+    var format: String = "pdf"
+
     @Option(name: .shortAndLong, help: "The height of the canvas in points.")
     var height: Double = 600
 
@@ -42,6 +45,6 @@ struct Plotty: AsyncParsableCommand {
 
         let page = Page(data: data, header: header, title: title)
         let canvas = Canvas(page: page, width: width, height: height)
-        canvas.render(to: output)
+        try canvas.render(to: output, format: format)
     }
 }

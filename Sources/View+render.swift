@@ -49,4 +49,35 @@ extension View {
 
         return data as Data
     }
+
+    public func renderPNG(locale: String = "en") -> Data? {
+        let renderer = ImageRenderer(content: self.environment(\.locale, .init(identifier: locale)))
+        guard let image = renderer.cgImage else {
+            print("Failed to create image.")
+            return nil
+        }
+        let data = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(data, "public.png" as CFString, 1, nil) else {
+            print("Failed to create image destination.")
+            return nil
+        }
+        CGImageDestinationAddImage(destination, image, nil)
+        CGImageDestinationFinalize(destination)
+        return data as Data
+    }
 }
+
+
+import UniformTypeIdentifiers
+
+struct ImageFileType {
+    var uti: UTType
+    var fileExtention: String
+
+    static let bmp = ImageFileType(uti: .bmp, fileExtention: "bmp")
+    static let gif = ImageFileType(uti: .gif, fileExtention: "gif")
+    static let jpg = ImageFileType(uti: .jpeg, fileExtention: "jpg")
+    static let png = ImageFileType(uti: .png, fileExtention: "png")
+    static let tiff = ImageFileType(uti: .tiff, fileExtention: "tiff")
+}
+

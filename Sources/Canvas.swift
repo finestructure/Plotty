@@ -22,17 +22,33 @@ public struct Canvas<Page: View>: View {
         page
     }
 
-    func render(to output: Output) {
+    func render(to output: Output, format: String) throws {
         switch output {
             case .file(let url):
-                let url = page.render(to: url.path())
-                print("Plot saved to \(url.path()).")
+                if format == "png" {
+                    guard let data = page.renderPNG() else {
+                        return
+                    }
+                    try data.write(to: url)
+                    print("Plot saved to \(url.path()).")
+                } else {
+                    let url = page.render(to: url.path())
+                    print("Plot saved to \(url.path()).")
+                }
             case .clipboard:
-                let data = page.render()
-                let pasteboard = NSPasteboard.general
-                pasteboard.clearContents()
-                pasteboard.setData(data, forType: .pdf)
-                print("Plot saved to clipboard.")
+                if format == "png" {
+                    let data = page.renderPNG()
+                    let pasteboard = NSPasteboard.general
+                    pasteboard.clearContents()
+                    pasteboard.setData(data, forType: .png)
+                    print("Plot saved to clipboard.")
+                } else {
+                    let data = page.render()
+                    let pasteboard = NSPasteboard.general
+                    pasteboard.clearContents()
+                    pasteboard.setData(data, forType: .pdf)
+                    print("Plot saved to clipboard.")
+                }
         }
     }
 }
