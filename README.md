@@ -27,8 +27,14 @@ Plotty renders its output to resolution independent PDF. It does not currently s
 
 ## Installation instructions
 
-The easiest way to install Plott is via [`mint`](https://swiftpackageindex.com/yonaskolb/Mint):
+The easiest way to install Plotty is via [`mint`](https://swiftpackageindex.com/yonaskolb/Mint):
 
 ```
 mint install finestructure/Plotty
+```
+
+Alternatively, clone the project and run
+
+```
+make install
 ```
