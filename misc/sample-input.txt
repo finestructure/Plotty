@@ -1,0 +1,43 @@
+pg-13
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+35e85d929aac   postgres:13-alpine   "docker-entrypoint.s…"   5 seconds ago   Up 4 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   spi_test
+Warm-up run...
+Elapsed: createSnapshot(original:snapshot:) 9.63902473449707
+Elapsed: createSnapshot(original:snapshot:) 9.956002235412598
+Elapsed: createSnapshot(original:snapshot:) 9.274959564208984
+Elapsed: createSnapshot(original:snapshot:) 16.322970390319824
+Elapsed: createSnapshot(original:snapshot:) 9.666919708251953
+Elapsed: createSnapshot(original:snapshot:) 9.83893871307373
+Elapsed: createSnapshot(original:snapshot:) 10.342955589294434
+Elapsed: createSnapshot(original:snapshot:) 9.54902172088623
+Elapsed: createSnapshot(original:snapshot:) 9.493112564086914
+Elapsed: createSnapshot(original:snapshot:) 10.04493236541748
+
+pg-14
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+b3b1d885d9ed   postgres:14-alpine   "docker-entrypoint.s…"   5 seconds ago   Up 4 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   spi_test
+Warm-up run...
+Elapsed: createSnapshot(original:snapshot:) 13.799071311950684
+Elapsed: createSnapshot(original:snapshot:) 12.67707347869873
+Elapsed: createSnapshot(original:snapshot:) 13.838052749633789
+Elapsed: createSnapshot(original:snapshot:) 11.90805435180664
+Elapsed: createSnapshot(original:snapshot:) 11.947989463806152
+Elapsed: createSnapshot(original:snapshot:) 13.233065605163574
+Elapsed: createSnapshot(original:snapshot:) 11.779069900512695
+Elapsed: createSnapshot(original:snapshot:) 11.688947677612305
+Elapsed: createSnapshot(original:snapshot:) 11.240005493164062
+Elapsed: createSnapshot(original:snapshot:) 11.162042617797852
+
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+35652557ad45   postgres:16-alpine   "docker-entrypoint.s…"   5 seconds ago   Up 4 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   spi_test
+Warm-up run...
+Elapsed: createSnapshot(original:snapshot:) 20.25902271270752
+Elapsed: createSnapshot(original:snapshot:) 19.636034965515137
+Elapsed: createSnapshot(original:snapshot:) 23.006916046142578
+Elapsed: createSnapshot(original:snapshot:) 19.214987754821777
+Elapsed: createSnapshot(original:snapshot:) 23.0410099029541
+Elapsed: createSnapshot(original:snapshot:) 17.575979232788086
+Elapsed: createSnapshot(original:snapshot:) 18.035054206848145
+Elapsed: createSnapshot(original:snapshot:) 19.00005340576172
+Elapsed: createSnapshot(original:snapshot:) 19.559025764465332
+Elapsed: createSnapshot(original:snapshot:) 17.053961753845215
