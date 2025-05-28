@@ -5,6 +5,7 @@ struct Page: View {
     let data: [(id: String, data: [Measurement])]
     let header: String?
     let title: String?
+    let yAxisDomain: ClosedRange<Double>?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -18,7 +19,7 @@ struct Page: View {
                     .font(.title.bold())
             }
 
-            PerformanceChart(data: data)
+            PerformanceChart(data: data, yAxisDomain: yAxisDomain)
         }
     }
 }

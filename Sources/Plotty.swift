@@ -20,6 +20,11 @@ struct Plotty: AsyncParsableCommand {
     @Option(name: .shortAndLong, help: "The path to the output file. Use 'clipboard' to copy the output to the Clipboard.")
     var output: Output = .clipboard
 
+    @Option(name: .shortAndLong, parsing: .upToNextOption, help: "Y axis range: ymin ymax. The range is determined automatically if unspecified.")
+    var yAxisRange: [Double] = []
+
+    var yAxisDomain: YAxisDomain? { .init(yAxisRange) }
+
     @MainActor
     mutating func run() async throws {
         print("Reading data...")
@@ -40,7 +45,7 @@ struct Plotty: AsyncParsableCommand {
         print("Parsed data:")
         print("\(data)")
 
-        let page = Page(data: data, header: header, title: title)
+        let page = Page(data: data, header: header, title: title, yAxisDomain: yAxisDomain)
         let canvas = Canvas(page: page, width: width, height: height)
         canvas.render(to: output)
     }
