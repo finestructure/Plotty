@@ -69,25 +69,29 @@ extension [Row?] {
             switch row {
                 case .measurement(let measurement):
                     if current == nil {
+                        // There's a break in the sequence, start a new series
                         current = .init(id: "Series \(res.count)", data: [])
                     }
                     current?.data.append(measurement)
                 case .seriesName(let id):
                     if let current, !current.data.isEmpty {
+                        // Flush any open, non-empty series to the result
                         res.append(.init(id: current.id, data: current.data))
                     }
                     current = .init(id: id, data: [])
                 case nil:
                     if current == nil {
+                        // Ignore subsequent breaks in the sequence
                         continue
                     }
                     if let current, !current.data.isEmpty {
+                        // Flush any open, non-empty series to the result
                         res.append(.init(id: current.id, data: current.data))
                     }
                     current = .init(id: "Series \(res.count)", data: [])
             }
         }
-        // Flush open series to the result
+        // Flush any open series to the result
         if let current {
             res.append(.init(id: current.id, data: current.data))
         }

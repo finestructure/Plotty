@@ -32,6 +32,32 @@ struct PlottyTests {
     }
 
     @Test
+    func Row_series_0() async throws {
+        let input = Input.string("""
+            Suite AllTests passed after 5.081 seconds
+            Suite AllTests passed after 5.274 seconds
+
+            Suite AllTests passed after 4.729 seconds
+            Suite AllTests passed after 4.755 seconds
+            """)
+        let rows = [Row?].parse(input)
+        let series = rows.series
+        #expect(series.count == 2)
+        #expect(series.first ==  .init(id: "Series 0",
+                                       data: [
+                                        .init(value: 5.081),
+                                        .init(value: 5.274),
+                                       ])
+        )
+        #expect(series.last == .init(id: "Series 1",
+                                     data: [
+                                        .init(value: 4.729),
+                                        .init(value: 4.755),
+                                     ])
+        )
+    }
+
+    @Test
     func Row_series_1() async throws {
         let input = Input.string("""
             Series: Default Strategy
