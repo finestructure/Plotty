@@ -91,8 +91,8 @@ extension [Row?] {
                     current = .init(id: "Series \(res.count)", data: [])
             }
         }
-        // Flush any open series to the result
-        if let current {
+        // Flush any open, non-empty series to the result
+        if let current, !current.data.isEmpty {
             res.append(.init(id: current.id, data: current.data))
         }
         return res
