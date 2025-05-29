@@ -73,17 +73,23 @@ extension [Row?] {
                     }
                     current?.data.append(measurement)
                 case .seriesName(let id):
-                    if let current {
+                    if let current, !current.data.isEmpty {
                         res.append(.init(id: current.id, data: current.data))
                     }
                     current = .init(id: id, data: [])
                 case nil:
                     if current == nil {
                         continue
-                    } else {
-                        current = .init(id: "Series \(res.count)", data: [])
                     }
+                    if let current, !current.data.isEmpty {
+                        res.append(.init(id: current.id, data: current.data))
+                    }
+                    current = .init(id: "Series \(res.count)", data: [])
             }
+        }
+        // Flush open series to the result
+        if let current {
+            res.append(.init(id: current.id, data: current.data))
         }
         return res
     }

@@ -32,7 +32,7 @@ struct PlottyTests {
     }
 
     @Test
-    func Row_series() async throws {
+    func Row_series_1() async throws {
         let input = Input.string("""
             Series: Default Strategy
             Suite AllTests passed after 5.081 seconds
@@ -44,22 +44,74 @@ struct PlottyTests {
         let rows = [Row?].parse(input)
         let series = rows.series
         #expect(series.count == 2)
-        #expect(series.first == 
-            .init(id: "Default Strategy", data: [
-                .init(value: 5.081),
-                .init(value: 5.274),
-            ])
+        #expect(series.first ==  .init(id: "Default Strategy",
+                                       data: [
+                                        .init(value: 5.081),
+                                        .init(value: 5.274),
+                                       ])
         )
-        #expect(rows.series == [
-            .init(id: "Default Strategy", data: [
-                .init(value: 5.081),
-                .init(value: 5.274),
-            ]),
-            .init(id: "file_copy Strategy", data: [
-                .init(value: 4.729),
-                .init(value: 4.755),
-            ]),
-        ])
+        #expect(series.last == .init(id: "file_copy Strategy",
+                                     data: [
+                                        .init(value: 4.729),
+                                        .init(value: 4.755),
+                                     ])
+        )
+    }
+
+    @Test
+    func Row_series_2() async throws {
+        let input = Input.string("""
+            Series: Default Strategy
+            
+            Suite AllTests passed after 5.081 seconds
+            Suite AllTests passed after 5.274 seconds
+            Series: file_copy Strategy
+            Suite AllTests passed after 4.729 seconds
+            Suite AllTests passed after 4.755 seconds
+            """)
+        let rows = [Row?].parse(input)
+        let series = rows.series
+        #expect(series.count == 2)
+        #expect(series.first ==  .init(id: "Series 0",
+                                       data: [
+                                        .init(value: 5.081),
+                                        .init(value: 5.274),
+                                       ])
+        )
+        #expect(series.last == .init(id: "file_copy Strategy",
+                                     data: [
+                                        .init(value: 4.729),
+                                        .init(value: 4.755),
+                                     ])
+        )
+    }
+
+    @Test
+    func Row_series_3() async throws {
+        let input = Input.string("""
+            Series: Default Strategy
+            Suite AllTests passed after 5.081 seconds
+            Suite AllTests passed after 5.274 seconds
+            
+            Series: file_copy Strategy
+            Suite AllTests passed after 4.729 seconds
+            Suite AllTests passed after 4.755 seconds
+            """)
+        let rows = [Row?].parse(input)
+        let series = rows.series
+        #expect(series.count == 2)
+        #expect(series.first ==  .init(id: "Default Strategy",
+                                       data: [
+                                        .init(value: 5.081),
+                                        .init(value: 5.274),
+                                       ])
+        )
+        #expect(series.last == .init(id: "file_copy Strategy",
+                                     data: [
+                                        .init(value: 4.729),
+                                        .init(value: 4.755),
+                                     ])
+        )
     }
 
 }
