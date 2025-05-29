@@ -29,14 +29,11 @@ struct Plotty: AsyncParsableCommand {
     mutating func run() async throws {
         print("Reading data...")
 
-        var measurements = [Measurement?]()
+        var rows = [Row?]()
         for line in input {
-            measurements.append(Measurement.parse(line))
+            rows.append(Row.parse(line))
         }
-        let series = measurements.series
-        let data = series.enumerated().map {
-            (id: "Series: \($0)", data: $1)
-        }
+        let data = rows.series
 
         guard !data.isEmpty else {
             print("No data found.")

@@ -4,7 +4,7 @@ import Charts
 
 
 struct PerformanceChart: View {
-    let data: [(id: String, data: [Measurement])]
+    let data: [Series]
     let yAxisDomain: YAxisDomain?
 
     var body: some View {
