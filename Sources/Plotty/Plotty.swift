@@ -3,7 +3,7 @@ import ArgumentParser
 @main
 struct Plotty: AsyncParsableCommand {
     @Option(name: .shortAndLong, help: "The height of the canvas in points.")
-    var height: Double = 600
+    var height: Double = 400
 
     @Option(name: .shortAndLong, help: "The width of the canvas in points.")
     var width: Double = 600
