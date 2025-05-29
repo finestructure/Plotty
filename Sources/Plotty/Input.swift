@@ -8,6 +8,7 @@ enum Input: ExpressibleByArgument {
     case clipboard
     case file(URL)
     case stdin
+    case string(String)
 
     init?(argument: String) {
         switch argument {
@@ -57,6 +58,9 @@ struct InputIterator: IteratorProtocol {
 
             case .stdin:
                 cursor = .stdin
+
+            case let .string(string):
+                cursor = .init(string)
         }
     }
 

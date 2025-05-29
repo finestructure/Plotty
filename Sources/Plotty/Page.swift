@@ -2,7 +2,7 @@ import SwiftUI
 
 
 struct Page: View {
-    let data: [(id: String, data: [Measurement])]
+    let data: [Series]
     let header: String?
     let title: String?
     let yAxisDomain: ClosedRange<Double>?
